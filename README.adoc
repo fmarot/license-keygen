@@ -1,0 +1,16 @@
+:toc: macro
+
+
+toc::[]
+
+= License Keygen
+
+forked from "spring-boot-sample-web-ui"
+
+TODO:
+* list all POJO
+* edit simple POJO (all properties)
+* advanced / simple mode
+* generate key button => checks input correctness first and generate the key or return error message
+* lmid input zone
+
