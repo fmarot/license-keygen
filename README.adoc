@@ -14,4 +14,5 @@ TODO:
 * advanced / simple mode
 * generate key button => checks input correctness first and generate the key or return error message
 * lmid input zone
+* run as war (ideally https) + run as jar (launch browser on startup)
 
