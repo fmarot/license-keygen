@@ -41,6 +41,23 @@ public class SampleWebUiApplication {
 		};
 	}
 
+	@Bean
+	public LicenseRepository licenseRepository() {
+		return new InMemoryLicenseRepository();
+	}
+
+	@Bean
+	public Converter<String, License> licenceConverter() {
+		return new Converter<String, License>() {
+
+			@Override
+			public License convert(String id) {
+				License findMessage = licenseRepository().findLicense(Long.valueOf(id));
+				return findMessage;
+			}
+		};
+	}
+
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SampleWebUiApplication.class, args);
 	}

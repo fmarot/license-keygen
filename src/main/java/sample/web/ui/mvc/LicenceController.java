@@ -15,9 +15,6 @@ package sample.web.ui.mvc;
 
 import javax.validation.Valid;
 
-import sample.web.ui.Message;
-import sample.web.ui.MessageRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,46 +25,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- * @author Rob Winch
- * @author Doo-Hwan Kwak
- */
-@Controller
-@RequestMapping("/message")
-public class MessageController {
+import sample.web.ui.LicenseRepository;
+import sample.web.ui.License;
 
-	private final MessageRepository	messageRepository;
+@Controller
+@RequestMapping("/")
+public class LicenceController {
+
+	private final LicenseRepository	licenseRepository;
 
 	@Autowired
-	public MessageController(MessageRepository messageRepository) {
-		this.messageRepository = messageRepository;
+	public LicenceController(LicenseRepository licenceRepository) {
+		this.licenseRepository = licenceRepository;
 	}
 
 	@RequestMapping
 	public ModelAndView list() {
-		Iterable<Message> messages = this.messageRepository.findAll();
-		return new ModelAndView("messages/list", "messages", messages);
+		Iterable<License> licences = licenseRepository.findAll();
+		return new ModelAndView("licences/list", "licences", licences);
 	}
 
 	@RequestMapping("{id}")
-	public ModelAndView view(@PathVariable("id") Message message) {
-		return new ModelAndView("messages/view", "message", message);
+	public ModelAndView view(@PathVariable("id") License licence) {
+		return new ModelAndView("licences/view", "licence", licence);
 	}
 
 	@RequestMapping(params = "form", method = RequestMethod.GET)
-	public String createForm(@ModelAttribute Message message) {
-		return "messages/form";
+	public String createForm(@ModelAttribute License license) {
+		return "licenses/form";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView create(@Valid Message message, BindingResult result,
-			RedirectAttributes redirect) {
+	public ModelAndView create(@Valid License license, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			return new ModelAndView("messages/form", "formErrors", result.getAllErrors());
+			return new ModelAndView("licenses/form", "formErrors", result.getAllErrors());
 		}
-		message = this.messageRepository.save(message);
-		redirect.addFlashAttribute("globalMessage", "Successfully created a new message");
-		return new ModelAndView("redirect:/message/{message.id}", "message.id", message.getId());
+		license = licenseRepository.save(license);
+		redirect.addFlashAttribute("globalMessage", "Successfully created a new license");
+		return new ModelAndView("redirect:/{license.id}", "license.id", license.getId());
 	}
 
 	@RequestMapping("foo")
@@ -77,14 +72,14 @@ public class MessageController {
 
 	@RequestMapping(value = "delete/{id}")
 	public ModelAndView delete(@PathVariable("id") Long id) {
-		this.messageRepository.deleteMessage(id);
-		Iterable<Message> messages = this.messageRepository.findAll();
-		return new ModelAndView("messages/list", "messages", messages);
+		licenseRepository.deleteLicense(id);
+		Iterable<License> licenses = licenseRepository.findAll();
+		return new ModelAndView("licenses/list", "licenses", licenses);
 	}
 
 	@RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
-	public ModelAndView modifyForm(@PathVariable("id") Message message) {
-		return new ModelAndView("messages/form", "message", message);
+	public ModelAndView modifyForm(@PathVariable("id") License license) {
+		return new ModelAndView("licenses/form", "license", license);
 	}
 
 }
