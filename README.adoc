@@ -8,6 +8,7 @@ toc::[]
 forked from "spring-boot-sample-web-ui"
 
 TODO:
+
 * list all POJO
 * edit simple POJO (all properties)
 * advanced / simple mode
