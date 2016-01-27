@@ -11,7 +11,7 @@
 	
 	<artifactId>license-keygen</artifactId>
 	
-	<description>License keygen</description>
+	<description>Licence keygen</description>
 	
 	<dependencies>
 		<dependency>

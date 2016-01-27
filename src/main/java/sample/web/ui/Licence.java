@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class License {
+public class Licence {
 
 	private Long		id;
 
