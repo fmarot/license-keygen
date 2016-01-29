@@ -19,7 +19,7 @@ import sample.web.ui.LicenceRepository;
 @RequestMapping("/")
 public class LicenceController {
 
-	private final LicenceRepository licenceRepository;
+	private final LicenceRepository	licenceRepository;
 
 	@Autowired
 	public LicenceController(LicenceRepository licenceRepository) {
@@ -50,11 +50,6 @@ public class LicenceController {
 		licence = licenceRepository.save(licence);
 		redirect.addFlashAttribute("globalMessage", "Successfully created a new licence");
 		return new ModelAndView("redirect:/{licence.id}", "licence.id", licence.getId());
-	}
-
-	@RequestMapping("foo")
-	public String foo() {
-		throw new RuntimeException("Expected exception in controller");
 	}
 
 	@RequestMapping(value = "delete/{id}")

@@ -16,11 +16,18 @@
 
 package sample.web.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootApplication
 public class SampleWebUiApplication {
 
@@ -60,6 +67,21 @@ public class SampleWebUiApplication {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SampleWebUiApplication.class, args);
+		String url = "http://127.0.0.1:8080/";
+		openWebBrowser(url);
+	}
+
+	private static void openWebBrowser(String url) throws IOException {
+		try {
+			if (Desktop.isDesktopSupported()) {
+				Desktop.getDesktop().browse(new URI(url));
+			} else {
+				Runtime.getRuntime().exec("xdg-open " + url);
+			}
+			log.info("Url {} opened in your browser", url);			
+		} catch (Exception e) {
+			log.info("Unable to Open web page in browser", e);
+		}
 	}
 
 }

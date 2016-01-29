@@ -14,9 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class InMemoryLicenceRepository implements LicenceRepository {
 
-	private static AtomicLong counter = new AtomicLong();
+	private static AtomicLong					counter		= new AtomicLong();
 
-	private final ConcurrentMap<Long, Licence> licences = new ConcurrentHashMap<Long, Licence>();
+	private final ConcurrentMap<Long, Licence>	licences	= new ConcurrentHashMap<Long, Licence>();
 
 	public InMemoryLicenceRepository() {
 		Properties prop = new Properties();
@@ -29,7 +29,10 @@ public class InMemoryLicenceRepository implements LicenceRepository {
 	}
 
 	private void createInitialModel(Properties prop) {
-		List<Licence> licences = prop.entrySet().stream().map(elt -> createDefaultLicence((String) elt.getKey(), (String) elt.getValue())).collect(Collectors.toList());
+		List<Licence> licences = prop.entrySet()
+				.stream()
+				.map(elt -> createDefaultLicence((String) elt.getKey(), (String) elt.getValue()))
+				.collect(Collectors.toList());
 		for (Licence lic : licences) {
 			this.licences.put(lic.getId(), lic);
 		}
