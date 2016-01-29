@@ -1,4 +1,4 @@
-package sample.web.ui.mvc;
+package sample.web.ui.licence.controller;
 
 import javax.validation.Valid;
 
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import sample.web.ui.Licence;
-import sample.web.ui.LicenceRepository;
+import sample.web.ui.licence.Licence;
+import sample.web.ui.licence.LicenceRepository;
 
 @Controller
 @RequestMapping("/")
 public class LicenceController {
 
-	private final LicenceRepository	licenceRepository;
+	private final LicenceRepository licenceRepository;
 
 	@Autowired
 	public LicenceController(LicenceRepository licenceRepository) {
@@ -59,6 +59,10 @@ public class LicenceController {
 		return new ModelAndView("licences/list", "licences", licences);
 	}
 
+	/**
+	 * The @PathVariable annotation need a Converter<String, Licence> to be registered
+	 * in the Context to be able to convert a String (the {id}) to a Licence.
+	 */
 	@RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(@PathVariable("id") Licence licence) {
 		return new ModelAndView("licences/form", "licence", licence);

@@ -11,7 +11,7 @@
  * specific language governing permissions and limitations under the Licence.
  */
 
-package sample.web.ui.mvc;
+package sample.web.ui.message.controller;
 
 import javax.validation.Valid;
 
@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import sample.web.ui.Message;
-import sample.web.ui.MessageRepository;
+import sample.web.ui.message.Message;
+import sample.web.ui.message.MessageRepository;
 
 /**
  * @author Rob Winch

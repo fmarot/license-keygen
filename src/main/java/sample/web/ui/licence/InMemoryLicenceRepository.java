@@ -1,4 +1,4 @@
-package sample.web.ui;
+package sample.web.ui.licence;
 
 import java.io.IOException;
 import java.io.InputStream;

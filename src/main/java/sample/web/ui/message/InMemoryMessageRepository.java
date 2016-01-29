@@ -14,7 +14,7 @@
  * limitations under the Licence.
  */
 
-package sample.web.ui;
+package sample.web.ui.message;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

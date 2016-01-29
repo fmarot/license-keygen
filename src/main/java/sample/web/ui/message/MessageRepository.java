@@ -11,7 +11,7 @@
  * specific language governing permissions and limitations under the Licence.
  */
 
-package sample.web.ui;
+package sample.web.ui.message;
 
 /**
  * @author Rob Winch

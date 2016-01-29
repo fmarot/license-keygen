@@ -26,6 +26,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 
 import lombok.extern.slf4j.Slf4j;
+import sample.web.ui.licence.InMemoryLicenceRepository;
+import sample.web.ui.licence.Licence;
+import sample.web.ui.licence.LicenceRepository;
+import sample.web.ui.message.InMemoryMessageRepository;
+import sample.web.ui.message.Message;
+import sample.web.ui.message.MessageRepository;
 
 @Slf4j
 @SpringBootApplication
