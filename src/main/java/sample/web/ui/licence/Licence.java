@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Licence {
 
-	private Long id;
-
 	@NotEmpty(message = "key is required.")
 	private String key;
 
@@ -25,8 +23,7 @@ public class Licence {
 
 	private boolean research = false;
 
-	public Licence(Long id, String key, String cmsCode) {
-		this.id = id;
+	public Licence(String key, String cmsCode) {
 		this.key = key;
 		this.cmsCode = cmsCode;
 	}

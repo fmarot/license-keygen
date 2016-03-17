@@ -27,8 +27,6 @@ import org.springframework.core.convert.converter.Converter;
 
 import lombok.extern.slf4j.Slf4j;
 import sample.web.ui.licence.InMemoryLicenceRepository;
-import sample.web.ui.licence.Licence;
-import sample.web.ui.licence.LicenceRepository;
 import sample.web.ui.message.InMemoryMessageRepository;
 import sample.web.ui.message.Message;
 import sample.web.ui.message.MessageRepository;
@@ -55,20 +53,8 @@ public class SampleWebUiApplication {
 	}
 
 	@Bean
-	public LicenceRepository licenceRepository() {
+	public InMemoryLicenceRepository licenceRepository() {
 		return new InMemoryLicenceRepository();
-	}
-
-	@Bean
-	public Converter<String, Licence> licenceConverter() {
-		return new Converter<String, Licence>() {
-
-			@Override
-			public Licence convert(String id) {
-				Licence findMessage = licenceRepository().findLicence(Long.valueOf(id));
-				return findMessage;
-			}
-		};
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -84,7 +70,7 @@ public class SampleWebUiApplication {
 			} else {
 				Runtime.getRuntime().exec("xdg-open " + url);
 			}
-			log.info("Url {} opened in your browser", url);			
+			log.info("Url {} opened in your browser", url);
 		} catch (Exception e) {
 			log.info("Unable to Open web page in browser", e);
 		}

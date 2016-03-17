@@ -6,37 +6,52 @@
 <title>Licence : View all</title>
 </head>
 <body>
-	<h1 layout:fragment="header">Licences : View all</h1>
+	<h1 layout:fragment="header">Licences : View all :)</h1>
 	<div layout:fragment="content" class="container">
-		
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<td>ID</td>
-					<td>Key</td>
-					<td>cmsCode</td>
-					<td>floating</td>
-					<td>research</td>
-					<td>Date</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:if="${licences.empty}">
-					<td colspan="3">No licences</td>
-				</tr>
-				<tr th:each="licence : ${licences}">
-					<td th:text="${licence.id}">1</td>
-					<td><a href="view.html" th:href="@{'/' + ${licence.id}}"
-						th:text="${licence.key}"> OLMRICT </a></td>
-					<td><a href="view.html" th:href="@{'/' + ${licence.id}}"
-						th:text="${licence.cmsCode}"> OM199 </a></td>
-					<td><input type="checkbox" th:checked="${licence.floating}" /></td>
-					<td><input type="checkbox" th:checked="${licence.research}" /></td>
-					<td th:text="${#calendars.format(licence.created)}">July 11,
-						2012 2:17:16 PM CDT</td>
-				</tr>
-			</tbody>
-		</table>
+
+		<form id="licenceForm" th:action="@{/(form)}" th:object="${licences}" action="#" method="post">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<td>Key</td>
+						<td>cmsCode</td>
+						<td>floating</td>
+						<td>research</td>
+						<td>Date</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${licences.licences.empty}">
+						<td colspan="3">No licences</td>
+					</tr>
+					<tr th:each="licence, stat : *{licences}">
+						<td>
+							<span th:text="${licence.key}"> KEY1 </span>
+							<input name="key1" type="hidden" th:field="*{licences[__${stat.index}__].key}"
+									th:id="${'key-'+stat.index}"/>
+						</td>
+						<td>
+							<span th:text="${licence.cmsCode}"> CMSCODE1 </span>
+							<input name="cmsCode1" type="hidden" th:field="*{licences[__${stat.index}__].cmsCode}"
+									th:id="${'cmsCode-'+stat.index}"/>							
+						</td>
+						<td>
+							<input name="floating1" type="checkbox" th:checked="${licence.floating}" 
+									th:field="*{licences[__${stat.index}__].floating}" th:id="${'floating-'+stat.index}"/>
+						</td>
+						<td>
+							<input name="research1" type="checkbox" th:checked="${licence.research}"
+									th:field="*{licences[__${stat.index}__].research}" th:id="${'research-'+stat.index}"/>
+						</td>
+						<td th:text="${#calendars.format(licence.created)}">July 11, 2012 2:17:16 PM CDT</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="form-actions">
+				<input type="submit" value="Save" />
+			</div>
+		</form>
 	</div>
 </body>
 </html>

@@ -13,6 +13,8 @@
 
 package sample.web.ui.message.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,11 @@ public class MessageController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid Message message, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors()) {
+
+			Map<String, Object> model = result.getModel();
+			Object target = result.getTarget();
+			String objectName = result.getObjectName();
+
 			return new ModelAndView("messages/form", "formErrors", result.getAllErrors());
 		}
 		message = this.messageRepository.save(message);
