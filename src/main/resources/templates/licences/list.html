@@ -3,11 +3,25 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="layout-licence">
 <head>
-<title>Licence : View all</title>
+	<title>Licence Generator</title>
 </head>
 <body>
 	<h1 layout:fragment="header">Licences : View all :)</h1>
+	
+
+    
 	<div layout:fragment="content" class="container">
+	
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var select = true;
+				$('button[name="select_all"]').click(function() {
+					var name = this.id;
+					$( "input[name$="+name+"]" ).prop('checked', select);
+					select = !select;
+				})
+			})
+		</script>
 
 		<form id="licenceForm" th:action="@{/(form)}" th:object="${licences}" action="#" method="post">
 			<table class="table table-bordered table-striped">
@@ -15,8 +29,8 @@
 					<tr>
 						<td>Key</td>
 						<td>cmsCode</td>
-						<td>floating</td>
-						<td>research</td>
+						<td>floating <button name="select_all" id="floating" type="button" >select all</button></td>
+						<td>research <button name="select_all" id="research" type="button" >select all</button></td>
 						<td>Date</td>
 					</tr>
 				</thead>
@@ -53,5 +67,6 @@
 			</div>
 		</form>
 	</div>
+
 </body>
 </html>

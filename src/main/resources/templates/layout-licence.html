@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-<title>Layout</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-	href="../../css/bootstrap.min.css" />
+	<title>Layout</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.2/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.2/dist/jquery.js}"></script>
 </head>
 <body>
 	<div class="container">
@@ -21,5 +22,6 @@
 		<h1 layout:fragment="header">Layout</h1>
 		<div layout:fragment="content">Fake content</div>
 	</div>
+
 </body>
 </html>
