@@ -6,7 +6,7 @@
 	<title>Licence Generator</title>
 </head>
 <body>
-	<h1 layout:fragment="header">Licences : View all :)</h1>
+	<h1 layout:fragment="header">Licences keygen</h1>
 	
 
     
@@ -14,31 +14,54 @@
 	
 		<script type="text/javascript">
 			$(document).ready(function() {
+				
+				// Handle the click on "select all" buttons
 				var select = true;
 				$('button[name="select_all"]').click(function() {
 					var name = this.id;
 					$( "input[name$="+name+"]" ).prop('checked', select);
 					select = !select;
 				})
+				
+				// Handle click anywhere in the cell -> transmited to the checkbox if any inside the cell
+				$('td').click(function (event) {
+					if (!$(event.target).is('input')) {
+						var obj =$(this).find('input');      
+						obj.prop('checked', !obj.is(':checked'));      
+					}
+				});
 			})
 		</script>
 
 		<form id="licenceForm" th:action="@{/(form)}" th:object="${licences}" action="#" method="post">
+			Lmid: <input type="text" style="width: 400px;" th:field="*{lmid}"/>
+			
+			Sphere profile: 
+			<select th:field="*{selectedProfile}">
+			    <option th:each="profileName:${licences.profiles}"
+			           th:value="${profileName}" th:text="${profileName}" th:selected="${profileName.equals(selectedProfile)}">v2.3</option>
+			</select>
+			
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<td>Key</td>
-						<td>cmsCode</td>
-						<td>floating <button name="select_all" id="floating" type="button" >select all</button></td>
-						<td>research <button name="select_all" id="research" type="button" >select all</button></td>
-						<td>Date</td>
+						<th>Generate</th>
+						<th>Key</th>
+						<th>cmsCode</th>
+						<th>floating <button name="select_all" id="floating" type="button" >select all</button></th>
+						<th>research <button name="select_all" id="research" type="button" >select all</button></th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:if="${licences.licences.empty}">
 						<td colspan="3">No licences</td>
 					</tr>
-					<tr th:each="licence, stat : *{licences}">
+					<tr th:each="licence, stat : *{licences}" disabled="true">
+						<td>
+							<input name="selected1" type="checkbox" th:checked="${licence.selected}" 
+									th:field="*{licences[__${stat.index}__].selected}" th:id="${'selected-'+stat.index}"/>							
+						</td>
 						<td>
 							<span th:text="${licence.key}"> KEY1 </span>
 							<input name="key1" type="hidden" th:field="*{licences[__${stat.index}__].key}"
@@ -63,8 +86,11 @@
 				</tbody>
 			</table>
 			<div class="form-actions">
-				<input type="submit" value="Save" />
+				<input type="submit" value="Generate licence" />
 			</div>
+
+
+
 		</form>
 	</div>
 

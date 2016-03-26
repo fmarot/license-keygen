@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import lombok.extern.slf4j.Slf4j;
 import sample.web.ui.licence.InMemoryLicenceRepository;
-import sample.web.ui.licence.Licences;
+import sample.web.ui.licence.LicencesInfo;
 
+@Slf4j
 @Controller
 @RequestMapping("/")
 public class LicenceController {
@@ -24,18 +26,18 @@ public class LicenceController {
 
 	@RequestMapping // GET by default
 	public ModelAndView list() {
-		Licences licences = licenceRepository.findAll();
+		LicencesInfo licences = licenceRepository.findAll();
+		licences.reOrder();
 		return new ModelAndView("licences/list", "licences", licences);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView generate(Licences licences, BindingResult result, RedirectAttributes redirect) {
-		// if (result.hasErrors()) {
-		// return new ModelAndView("licences/form", "formErrors", result.getAllErrors());
-		// }
-		// licence = licenceRepository.save(licence);
-		// Iterable<Licence> licences = licenceRepository.findAll();
+	public ModelAndView generate(LicencesInfo licences, BindingResult result, RedirectAttributes redirect) {
 		redirect.addFlashAttribute("globalMessage", "coucou toto");
+
+		// List<Licence> licences = licenceInput.getLicences();
+		log.warn("lmid = {}", licences.getLmid());
+		licences.reOrder();
 		return new ModelAndView("licences/list", "licences", licences);
 	}
 

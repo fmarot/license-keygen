@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class InMemoryLicenceRepository {
 
-	private Licences licences;
+	private LicencesInfo licences;
 
 	public InMemoryLicenceRepository() {
 		Properties prop = new Properties();
@@ -26,10 +26,10 @@ public class InMemoryLicenceRepository {
 				.map(elt -> new Licence((String) elt.getKey(), (String) elt.getValue()))
 				.collect(Collectors.toList());
 		// @formatter:on
-		licences = new Licences(list);
+		licences = new LicencesInfo(list);
 	}
 
-	public Licences findAll() {
+	public LicencesInfo findAll() {
 		return licences;
 	}
 }

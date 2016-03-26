@@ -2,8 +2,6 @@ package sample.web.ui.licence;
 
 import java.util.Calendar;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Licence {
 
-	@NotEmpty(message = "key is required.")
+	private boolean selected;
+
 	private String key;
 
-	@NotEmpty(message = "cmsCode is required.")
 	private String cmsCode;
 
 	private final Calendar created = Calendar.getInstance();
