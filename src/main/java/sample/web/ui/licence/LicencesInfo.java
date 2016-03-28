@@ -1,13 +1,13 @@
 package sample.web.ui.licence;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import sample.web.ui.profile.Profile;
 
 @Data
 @NoArgsConstructor
@@ -17,15 +17,18 @@ public class LicencesInfo {
 
 	private List<Licence> licences = new ArrayList<>();
 
-	private List<String> profiles = Arrays.asList("eee", "zzzz");
+	private List<Profile> profiles = new ArrayList<>();
 
-	private String selectedProfile;
+	private Profile selectedProfile;
 
-	public LicencesInfo(List<Licence> licences) {
+	public LicencesInfo(List<Licence> licences, List<Profile> profiles, Profile selectedProfile) {
 		this.licences = licences;
+		this.profiles = profiles;
+		this.selectedProfile = selectedProfile;
+		reOrder();
 	}
 
-	public void reOrder() {
+	private void reOrder() {
 		Collections.sort(licences, new Comparator<Licence>() {
 
 			@Override

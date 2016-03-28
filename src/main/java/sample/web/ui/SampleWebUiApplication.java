@@ -26,7 +26,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 
 import lombok.extern.slf4j.Slf4j;
-import sample.web.ui.licence.InMemoryLicenceRepository;
+import sample.web.ui.repository.LicenceRepository;
 
 @Slf4j
 @SpringBootApplication
@@ -44,8 +44,8 @@ public class SampleWebUiApplication implements ApplicationListener<EmbeddedServl
 	}
 
 	@Bean
-	public InMemoryLicenceRepository licenceRepository() {
-		return new InMemoryLicenceRepository();
+	public LicenceRepository licenceRepository() {
+		return new LicenceRepository();
 	}
 
 	public static void main(String[] args) throws Exception {

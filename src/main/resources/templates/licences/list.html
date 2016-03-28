@@ -38,8 +38,8 @@
 			
 			Sphere profile: 
 			<select th:field="*{selectedProfile}">
-			    <option th:each="profileName:${licences.profiles}"
-			           th:value="${profileName}" th:text="${profileName}" th:selected="${profileName.equals(selectedProfile)}">v2.3</option>
+			    <option th:each="profile:${licences.profiles}"
+			           th:value="${profile}" th:text="${profile}" >v2.3</option>
 			</select>
 			
 			<table class="table table-bordered table-striped">
